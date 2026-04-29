@@ -53,10 +53,10 @@ A API estará disponível em `http://localhost:5000`.
 
 API
 
-✅ CRUD de Produtos e Categorias\
-✅ Autenticação via JWT\ (Opcional, caso fizer será um diferencial para o teste)
-✅ Paginação de produtos\ 
-✅ Registro de logs com ILogger\ (Opcional, caso fizer será um diferencial para o teste)
+✅ CRUD de Produtos e Categorias
+✅ Autenticação via JWT (Opcional, caso fizer será um diferencial para o teste)
+✅ Paginação de produtos
+✅ Registro de logs com ILogger (Opcional, caso fizer será um diferencial para o teste)
 ✅ Histórico de preços e relatórios (Opcional, caso fizer será um diferencial para o teste)
 
 Aplicação WinForms
