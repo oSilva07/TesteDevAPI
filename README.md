@@ -1,5 +1,3 @@
-Teste para Desenvolvedor Pleno
-
 📌 Objetivo do Projeto
 
 Este projeto consiste na criação de uma **API RESTful** em **C# com ASP.NET Core e SQLite**, além de um **aplicativo WinForms** que consome essa API. O objetivo é aplicar boas práticas de desenvolvimento para garantir eficiência, segurança e escalabilidade.
