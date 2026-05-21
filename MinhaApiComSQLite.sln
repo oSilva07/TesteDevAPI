@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaApiComSQLite", "MinhaApiComSQLite\MinhaApiComSQLite.csproj", "{B190204E-E6E1-4741-9250-349E5EB4FE39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaApiComSQLite.Tests", "MinhaApiComSQLite.Tests\MinhaApiComSQLite.Tests.csproj", "{913EF9AA-B866-4C9B-AD02-7935BEBA0773}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinhaAppWinForms", "MinhaAppWinForms\MinhaAppWinForms.csproj", "{73561254-CFB2-480B-AF3A-184E6B4FC059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B190204E-E6E1-4741-9250-349E5EB4FE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B190204E-E6E1-4741-9250-349E5EB4FE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B190204E-E6E1-4741-9250-349E5EB4FE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913EF9AA-B866-4C9B-AD02-7935BEBA0773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913EF9AA-B866-4C9B-AD02-7935BEBA0773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913EF9AA-B866-4C9B-AD02-7935BEBA0773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913EF9AA-B866-4C9B-AD02-7935BEBA0773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73561254-CFB2-480B-AF3A-184E6B4FC059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73561254-CFB2-480B-AF3A-184E6B4FC059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73561254-CFB2-480B-AF3A-184E6B4FC059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73561254-CFB2-480B-AF3A-184E6B4FC059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
