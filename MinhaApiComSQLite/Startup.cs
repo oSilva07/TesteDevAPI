@@ -14,6 +14,10 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using MinhaApiComSQLite.Data;
 using Microsoft.EntityFrameworkCore;
+using MinhaApiComSQLite.Repositories;
+using MinhaApiComSQLite.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MinhaApiComSQLite
 {
@@ -29,6 +33,7 @@ namespace MinhaApiComSQLite
         // Método chamado pela ASP.NET Core para adicionar serviços ao container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<MinhaApiComSQLite.Services.TokenService>();
             // Configurar banco de dados SQLite
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
@@ -50,9 +55,43 @@ namespace MinhaApiComSQLite
                     }
                 });
             });
+            var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Secret"]);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
 
             // Configurar controladores e endpoints
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => 
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            // Registrando Repositories (Interface + Classe)
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IHistoricoPrecoRepository, HistoricoPrecoRepository>();
+
+            // Registrando Services (Interface + Classe)
+            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
         }
 
         // Método chamado pela ASP.NET Core para configurar o pipeline HTTP.
@@ -71,6 +110,7 @@ namespace MinhaApiComSQLite
 
             app.UseHttpsRedirection(); // Força HTTPS
             app.UseRouting();          // Habilita o roteamento
+            app.UseAuthentication();   // Habilita a autenticação
             app.UseAuthorization();    // Habilita a autorização
 
             app.UseEndpoints(endpoints =>
