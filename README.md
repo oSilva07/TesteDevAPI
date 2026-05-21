@@ -1,194 +1,140 @@
-📌 Objetivo do Projeto
+# 📌 API RESTful e Cliente WinForms - Teste Técnico
 
-Este projeto consiste na criação de uma **API RESTful** em **C# com ASP.NET Core e SQLite**, além de um **aplicativo WinForms** que consome essa API. O objetivo é aplicar boas práticas de desenvolvimento para garantir eficiência, segurança e escalabilidade.
+Este projeto consiste na criação de uma API RESTful em C# com ASP.NET Core e SQLite, além de um aplicativo WinForms que consome essa API. O objetivo é aplicar boas práticas de desenvolvimento de software para garantir eficiência, segurança, escalabilidade e manutenibilidade.
 
-🔧 Tecnologias Utilizadas
+## 🔧 Tecnologias Utilizadas
 
-- **ASP.NET Core** (Desenvolvimento da API)
-- **Entity Framework Core** (ORM para persistência de dados)
-- **SQLite** (Banco de dados leve para armazenamento)
-- **JWT (JSON Web Token)** (Autenticação e segurança) **(Opcional, caso fizer será um diferencial para o teste)**
-- **WinForms** (Interface gráfica para consumo da API)
-- **HttpClient** (Consumo de API no cliente WinForms)
-- **ILogger** (Monitoramento e logs) **(Opcional, caso fizer será um diferencial para o teste)**
-- **xUnit** (Testes unitários)
+* **ASP.NET Core:** Desenvolvimento da API Web.
+* **Entity Framework Core:** ORM para persistência de dados.
+* **SQLite:** Banco de dados leve para armazenamento.
+* **JWT (JSON Web Token):** Autenticação e segurança de endpoints.
+* **WinForms:** Interface gráfica (.NET 8) para consumo da API.
+* **HttpClient:** Consumo assíncrono da API no cliente desktop.
+* **ILogger:** Monitoramento e logs de execução.
+* **xUnit & Moq:** Testes unitários com isolamento de dependências.
 
-📂 Estrutura do Projeto
+## 📂 Estrutura do Projeto
+A solução foi organizada para separar as responsabilidades de forma clara, utilizando o padrão de injeção de dependências e arquitetura em camadas (Controllers, Services, Repositories e DTOs).
 
 ```
-📁 MinhaApiComSQLite
-│── 📁 Controllers
-│── 📁 Services
-│── 📁 Repositories
-│── 📁 DTOs
-│── 📁 Models
-│── 📁 Data (Contexto do banco de dados)
-│── 📁 Tests (Testes unitários)
-│── Program.cs
-│── Startup.cs
+📁 TesteDevAPI/
+├── 📁 MinhaApiComSQLite (Projeto da API)
+│   │── 📁 .postman
+│   │── 📁 .vscode
+│   │── 📁 bin \ Debug \ net8.0
+│   │── 📁 Controllers
+│   │── 📁 Data
+│   │── 📁 DTOs
+│   │── 📁 Migrations
+│   │── 📁 Models
+│   │── 📁 obj
+│   │── 📁 postman
+│   │── 📁 Properties
+│   │── 📁 Repositories
+│   │── 📁 Services
+│   │── appsettings.Development.json
+│   │── appsettings.json
+│   │── MinhaApiComSQLite.csproj
+│   │── MinhaApiComSQLite.http
+│   │── produtos.db
+│   │── produtos.db-shm
+│   │── produtos.db-wal
+│   │── Program.cs
+│   │── Startup.cs
+│
+├── 📁 MinhaApiComSQLite.Tests
+│   │── UnitTest1.cs
+│   │── MinhaApiComSQLite.Tests.csproj
+│
+└── 📁 MinhaAppWinForms (Projeto Cliente)
+│   │── Form1.cs
+│   │── Form1.Designer.cs
+│   │── MinhaAppWinForms.csproj
+│   │── MinhaAppWinForms.csproj.user
+    │── Program.cs
 ```
 
-🚀 Como Executar o Projeto
-
-1️⃣ Clonando o Repositório
-
-```bash
+##🚀 Como Executar o Projeto
+###1️⃣ Clonando o Repositório
+```
 git clone <URL_DO_REPOSITORIO>
 cd TesteDevAPI
 ```
 
-2️⃣ Configurando o Banco de Dados
+###2️⃣ Rodando a API (Backend)
+O banco de dados SQLite é gerado e atualizado automaticamente via Entity Framework.
+Abra um terminal na pasta da API e execute:
 
-- O banco de dados **SQLite** já está configurado no projeto.
-- Para aplicar as migrações, execute:
-
-```bash
-dotnet ef database update
 ```
-A API estará disponível em `http://localhost:5000`.
+cd MinhaApiComSQLite
+dotnet run
+```
+A API estará disponível por padrão em https://localhost:5001 ou http://localhost:5000.
 
-📌 Funcionalidades Implementadas
+###3️⃣ Rodando o Cliente WinForms (Frontend)
+Abra um novo terminal na raiz do repositório e execute:
 
-API
+```
+dotnet run --project MinhaAppWinForms\MinhaAppWinForms.csproj
+```
 
-✅ CRUD de Produtos e Categorias
-✅ Autenticação via JWT (Opcional, caso fizer será um diferencial para o teste)
-✅ Paginação de produtos
-✅ Registro de logs com ILogger (Opcional, caso fizer será um diferencial para o teste)
-✅ Histórico de preços e relatórios (Opcional, caso fizer será um diferencial para o teste)
+###4️⃣ Rodando os Testes Unitários
+Para validar as regras de negócio via xUnit, execute na raiz do repositório:
+```
+dotnet test
+```
 
-Aplicação WinForms
+##📌 Funcionalidades Implementadas
 
-✅ Interface gráfica com **DataGridView**\
-✅ Botões para **Criar, Atualizar e Excluir** produtos\
-✅ Consumo da API com **HttpClient**\
-✅ Uso de **Models** para manipulação de dados
+###API
+```
+✅ CRUD de Produtos e Categorias: Isolado em Services e Repositories.
+✅ Autenticação via JWT: Endpoints de alteração protegidos (Diferencial concluído).
+✅ Paginação de produtos: Utilizando Skip e Take direto no banco.
+✅ Registro de logs: Utilizando ILogger nas Controllers (Diferencial concluído).
+✅ Histórico de preços: Rastreamento de alterações de valor (Diferencial concluído).
+✅ Relatórios e Estatísticas: Endpoint dedicado para métricas do estoque (Diferencial concluído).
+✅ Regras de Negócio Avançadas: Validação de preço positivo e primeira letra maiúscula garantidos por testes unitários.
+```
 
-📜 Exemplo de Requisição
+###Aplicação WinForms
+```
+✅ Interface gráfica com DataGridView.
+✅ Formulário completo integrado com os botões para Criar, Atualizar e Excluir produtos.
+✅ Consumo da API com HttpClient.
+✅ Autenticação JWT injetada nativamente nas requisições.
+✅ Uso de DTOs/Models para manipulação de dados no Grid.
+```
 
-Criar Produto (POST)
+##📜 Exemplos de Requisição
+Como a API é protegida, os endpoints de escrita exigem autenticação.
 
-```json
-POST /api/produtos
+1. Gerar Token (POST)
+```
+POST /api/auth/login
+Content-Type: application/json
+
 {
-  "nome": "Produto Exemplo",
-  "preco": 50.00,
+  "usuario": "admin",
+  "senha": "admin123"
+}
+```
+
+2. Criar Produto (POST)
+```
+POST /api/produto
+Authorization: Bearer {SEU_TOKEN_AQUI}
+Content-Type: application/json
+
+{
+  "nome": "Monitor Ultrawide",
+  "preco": 1250.00,
+  "estoque": 10,
   "categoriaId": 1
 }
 ```
 
-Neste teste, você deverá desenvolver uma API RESTful em C# com ASP.NET Core e 
-SQLite, aplicando boas práticas de arquitetura e desenvolvimento para garantir 
-eficiência, segurança e manutenibilidade. 
-
-**1. Requisitos Funcionais** 
-  - Implementar os métodos CRUD para a entidade Produto, com os seguintes 
-  atributos: 
-      - Id (auto gerado pelo banco de dados) 
-      - Nome (string, deve ser descritivo e único) 
-      - Preço (decimal, maior que zero) 
-      - CategoriaId (relacionamento com a entidade Categoria)
-        
-  - Implementar os métodos CRUD para a entidade Categoria, com os seguintes 
-  atributos: 
-      - Id (auto gerado pelo banco de dados) 
-      - o Nome (string, deve ser descritivo e único)
-        
-  - Implementar autenticação JWT, garantindo que apenas usuários autenticados 
-  possam acessar endpoints protegidos. **(Opcional, caso fizer será um diferencial para o teste)**
-
-  - Implementar paginação para a listagem de produtos.
-    
-  - Implementar logs e monitoramento utilizando ILogger<T>. **(Opcional, caso fizer será um diferencial para o teste)**
-    
-  - Implementar um endpoint que permita consultar o histórico de preços de um 
-  produto. **(Opcional, caso fizer será um diferencial para o teste)**
-
-  - Criar um endpoint que retorne relatórios e estatísticas, como: 
-      - Total de produtos cadastrados 
-      - Média de preços dos produtos 
-      - Valor total dos produtos no estoque
-        
-  - Aplicar validações rigorosas na entrada de dados.
-    
-  - Criar um aplicativo WinForms que consuma a API, com as seguintes 
-  funcionalidades: 
-    - Interface gráfica com DataGridView para listar produtos. 
-    - Botões para Criar, Atualizar e Excluir produtos com base no Grid View. 
-    - Uso de HttpClient para realizar as requisições à API. 
-    o Models para manipular os dados obtidos da API.
-
-**2. Requisitos Técnicos**
-    - Utilizar ASP.NET Core para desenvolver a API. 
-    - Utilizar Entity Framework Core com SQLite para persistência de dados. 
-    - Aplicar arquitetura em camadas separadas (Controllers, Services, Repositories, 
-DTOs). 
-    - Criar testes unitários para validar as funcionalidades críticas. 
-    - Utilizar WinForms para criar o aplicativo cliente que consome a API. 
-    
-**3. Regras de Negócio Avançadas** 
-    - O nome do produto deve ser armazenado sempre com a primeira letra 
-    maiúscula. 
-    - O preço do produto não pode ser negativo ou igual a zero. 
-
-**4. Instruções**
-   - Criar uma documentação mínima explicando como rodar o projeto e exemplos de 
-    requisições. 
-   - Desenvolver o aplicativo WinForms, garantindo integração com a API. 
-   - Enviar um link para o repositório atualizado.
-       
-   - Paginação 
-      A paginação permite que grandes volumes de dados sejam retornados de forma eficiente, 
-      evitando sobrecarregar o banco de dados e melhorando a experiência do usuário. 
-      Exemplo de implementação no ASP.NET Core: 
-
-```csharp
-public async Task<IActionResult> GetProdutos(int pageNumber = 1, int pageSize = 10) 
-{ 
-    var produtos = await _context.Produtos 
-        .OrderBy(p => p.Nome) 
-        .Skip((pageNumber - 1) * pageSize) 
-        .Take(pageSize) 
-        .ToListAsync(); 
-        
-    return Ok(produtos); 
-}
+3. Listar Produtos Paginados (GET - Público)
 ```
-
-Chamando o endpoint: GET /api/produtos?pageNumber=1&pageSize=10
-
-**(Opcional, caso fizer será um diferencial para o teste)**
-Monitoramento e Logs 
-
-Para registrar eventos importantes, podemos utilizar ILogger<T> no ASP.NET Core: 
-
-```csharp
-public class ProdutoService 
-{ 
- private readonly ILogger<ProdutoService> _logger; 
- public ProdutoService(ILogger<ProdutoService> logger) 
- { 
- _logger = logger; 
- } 
- public void AdicionarProduto(Produto produto) 
- { 
- _logger.LogInformation($"Produto {produto.Nome} adicionado em 
-{DateTime.UtcNow}"); 
- } 
-}
+GET /api/produto?pageNumber=1&pageSize=10
 ```
-
-Os logs podem ser visualizados no console ou configurados para serem salvos em 
-arquivos.
-
-✅ Critérios de Avaliação
-
-- Implementação correta dos requisitos funcionais e técnicos.
-- Uso de boas práticas de código e arquitetura.
-- Cobertura de testes unitários.
-- Documentação clara e objetiva.
-
----
-
-✉️ **Dúvidas? Entre em contato!**
-
