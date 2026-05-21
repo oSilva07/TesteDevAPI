@@ -54,14 +54,14 @@ A solução foi organizada para separar as responsabilidades de forma clara, uti
     │── Program.cs
 ```
 
-##🚀 Como Executar o Projeto
-###1️⃣ Clonando o Repositório
+## 🚀 Como Executar o Projeto
+### 1️⃣ Clonando o Repositório
 ```
 git clone <URL_DO_REPOSITORIO>
 cd TesteDevAPI
 ```
 
-###2️⃣ Rodando a API (Backend)
+### 2️⃣ Rodando a API (Backend)
 O banco de dados SQLite é gerado e atualizado automaticamente via Entity Framework.
 Abra um terminal na pasta da API e execute:
 
@@ -71,22 +71,22 @@ dotnet run
 ```
 A API estará disponível por padrão em https://localhost:5001 ou http://localhost:5000.
 
-###3️⃣ Rodando o Cliente WinForms (Frontend)
+### 3️⃣ Rodando o Cliente WinForms (Frontend)
 Abra um novo terminal na raiz do repositório e execute:
 
 ```
 dotnet run --project MinhaAppWinForms\MinhaAppWinForms.csproj
 ```
 
-###4️⃣ Rodando os Testes Unitários
+### 4️⃣ Rodando os Testes Unitários
 Para validar as regras de negócio via xUnit, execute na raiz do repositório:
 ```
 dotnet test
 ```
 
-##📌 Funcionalidades Implementadas
+## 📌 Funcionalidades Implementadas
 
-###API
+### API
 ```
 ✅ CRUD de Produtos e Categorias: Isolado em Services e Repositories.
 ✅ Autenticação via JWT: Endpoints de alteração protegidos (Diferencial concluído).
@@ -97,7 +97,7 @@ dotnet test
 ✅ Regras de Negócio Avançadas: Validação de preço positivo e primeira letra maiúscula garantidos por testes unitários.
 ```
 
-###Aplicação WinForms
+### Aplicação WinForms
 ```
 ✅ Interface gráfica com DataGridView.
 ✅ Formulário completo integrado com os botões para Criar, Atualizar e Excluir produtos.
@@ -106,7 +106,7 @@ dotnet test
 ✅ Uso de DTOs/Models para manipulação de dados no Grid.
 ```
 
-##📜 Exemplos de Requisição
+## 📜 Exemplos de Requisição
 Como a API é protegida, os endpoints de escrita exigem autenticação.
 
 1. Gerar Token (POST)
